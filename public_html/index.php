@@ -1,6 +1,6 @@
 <?php
 
-$page_title = "simon";
+$page_title = "Title";
 require __DIR__ . '/db.php';
 $result = mysqli_query($con, "SELECT * FROM posts ORDER BY created_at DESC");
 $logged_in = isset($_SESSION['user']);
