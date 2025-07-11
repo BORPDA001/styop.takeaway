@@ -8,37 +8,74 @@ unset($_SESSION['post_errors'], $_SESSION['post_old']);
 <head>
     <meta charset="UTF-8" />
     <title>Նոր գրառում</title>
-    <style>
-        body { font-family: Arial, sans-serif; background: #f9f9f9; }
-        .container { max-width: 600px; margin: 50px auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        input[type="text"], textarea { width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc; font-size: 16px; }
-        button { background: #4CAF50; color: white; padding: 12px 20px; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; }
-        button:hover { background: #45a049; }
-        .error { background: #ffe0e0; color: #b30000; padding: 10px; border-radius: 6px; margin-bottom: 15px; }
-        a { text-decoration: none; color: #333; }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
-<body>
+<body class="bg-light">
 
-<div class="container">
-    <h2>Ավելացնել նոր գրառում</h2>
+<div class="container py-5">
+    <div class="card shadow-sm mx-auto" style="max-width: 700px;">
+        <div class="card-body">
+            <h2 class="card-title text-center mb-4">➕ Ավելացնել նոր գրառում</h2>
 
-    <?php if (!empty($errors)): ?>
-        <div class="error">
-            <?php foreach ($errors as $e): ?>
-                <p><?= htmlspecialchars($e) ?></p>
-            <?php endforeach; ?>
+            <?php if (!empty($errors)): ?>
+                <div class="alert alert-danger">
+                    <?php foreach ($errors as $e): ?>
+                        <div><?= htmlspecialchars($e) ?></div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+
+            <form action="../routes/web.php?action=post_create" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="action" value="post_create">
+
+                <div class="mb-3">
+                    <label for="title" class="form-label">Վերնագիր</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="title"
+                            name="title"
+                            value="<?= htmlspecialchars($old['title'] ?? '') ?>"
+                            placeholder="Մուտքագրեք վերնագիրը"
+                            required
+                    >
+                </div>
+
+                <div class="mb-3">
+                    <label for="content" class="form-label">Բովանդակություն</label>
+                    <textarea
+                            class="form-control"
+                            id="content"
+                            name="content"
+                            rows="6"
+                            placeholder="Մուտքագրեք բովանդակությունը"
+                            required
+                    ><?= htmlspecialchars($old['content'] ?? '') ?></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="video" class="form-label">Վիդեո (mp4 / webm)</label>
+                    <input
+                            class="form-control"
+                            type="file"
+                            id="video"
+                            name="video"
+                            accept="video/mp4,video/webm"
+                    >
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-success">💾 Պահպանել</button>
+                </div>
+            </form>
+
+            <div class="mt-3 text-center">
+                <a href="../routes/web.php?action=posts_list" class="btn btn-link">⬅️ Վերադառնալ ցուցակին</a>
+            </div>
         </div>
-    <?php endif; ?>
-
-    <form action="/routes/web.php?action=post_create" method="post">
-        <input type="hidden" name="action" value="post_create">
-        <input type="text" name="title" placeholder="Վերնագիր" value="<?= htmlspecialchars($old['title'] ?? '') ?>" required>
-        <textarea name="content" rows="6" placeholder="Բովանդակություն" required><?= htmlspecialchars($old['content'] ?? '') ?></textarea>
-        <button type="submit">Պահպանել</button>
-    </form>
-    <p><a href="/routes/web.php?action=posts_list">Վերադառնալ ցուցակին</a></p>
+    </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
