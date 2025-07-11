@@ -1,6 +1,7 @@
 <?php
 require __DIR__ . '/../db.php';
 require_once __DIR__ . '/../posts.php';
+include __DIR__.'/layouts/header.php';
 
 $user_id = $_SESSION['user']['id'] ?? 0;
 
@@ -160,35 +161,7 @@ $result = mysqli_query($con, "SELECT * FROM posts ORDER BY created_at DESC");
             let btn = $(this);
             let postId = btn.data('post-id');
 
-            $.post('web.php?action=post_like', { post_id: postId }, function(data) {
-                try {
-                    let res = JSON.parse(data);
-                    let countElem = btn.find('.like-count');
-                    let currentCount = parseInt(countElem.text()) || 0;
-
-                    if (res.success === 'liked') {
-                        countElem.text(currentCount + 1);
-                        btn.addClass('liked');
-                    } else if (res.success === 'unliked') {
-                        countElem.text(Math.max(currentCount - 1, 0));
-                        btn.removeClass('liked');
-                    } else if (res.error) {
-                        alert(res.error);
-                    } else {
-                        alert('Դուք պետք է մուտք գործած լինեք լայք անելու համար։');
-                    }
-                } catch (e) {
-                    alert('Սխալ պատասխան սերվերից։');
-                }
-            });
-        });
-    });
-    $(function(){
-        $('.like-btn').click(function(){
-            let btn = $(this);
-            let postId = btn.data('post-id');
-
-            $.post('web.php?action=post_like', { post_id: postId }, function(data) {
+            $.post('../routes/web.php?action=post_like', { post_id: postId }, function(data) {
                 try {
                     let res = JSON.parse(data);
                     let countElem = btn.find('.like-count');
@@ -218,6 +191,4 @@ $result = mysqli_query($con, "SELECT * FROM posts ORDER BY created_at DESC");
         });
     });
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+<?php require __DIR__ . '/layouts/footer.php'; ?>

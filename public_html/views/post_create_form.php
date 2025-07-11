@@ -1,4 +1,5 @@
 <?php
+include __DIR__.'/layouts/header.php';
 $errors = $_SESSION['post_errors'] ?? [];
 $old = $_SESSION['post_old'] ?? [];
 unset($_SESSION['post_errors'], $_SESSION['post_old']);
@@ -76,6 +77,4 @@ unset($_SESSION['post_errors'], $_SESSION['post_old']);
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+<?php require __DIR__ . '/layouts/footer.php'; ?>

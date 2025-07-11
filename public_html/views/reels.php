@@ -1,7 +1,6 @@
 <?php
 
 include __DIR__.'/layouts/header.php';
-
 require '../db.php';
 require_once  '../posts.php';
 $user_id = $_SESSION['user']['id'] ?? 0;
@@ -81,11 +80,6 @@ while ($row = mysqli_fetch_assoc($result)) {
 <body>
 
 <div class="reels-wrapper">
-
-    <a href="web.php?action=index" class="btn btn-outline-light btn-sm back-btn">
-        <i class="bi bi-arrow-left"></i> Գլխավոր
-    </a>
-
     <button id="prev-btn" class="arrow-btn" title="Նախորդ"><i class="bi bi-arrow-up"></i></button>
 
     <video id="reel-video" controls autoplay muted playsinline>
@@ -131,6 +125,4 @@ while ($row = mysqli_fetch_assoc($result)) {
 
     loadVideo(currentIndex);
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+<?php require __DIR__ . '/layouts/footer.php'; ?>

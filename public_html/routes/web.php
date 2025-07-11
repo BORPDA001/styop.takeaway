@@ -32,6 +32,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         exit;
     }
+    else if ($action === 'add_comment') {
+        header('Content-Type: application/json');
+        $user_id = $_SESSION['user']['id'] ?? 0;
+        $post_id = intval($_POST['post_id'] ?? 0);
+        $content = trim($_POST['content'] ?? '');
+
+        if ($user_id <= 0) {
+            echo json_encode(['error' => 'Մուտք գործեք մեկնաբանելու համար։']);
+            exit;
+        }
+
+        if ($post_id <= 0 || empty($content)) {
+            echo json_encode(['error' => 'Դատարկ տվյալներ։']);
+            exit;
+        }
+
+        if (addComment($con, $user_id, $post_id, $content)) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['error' => 'Չհաջողվեց ավելացնել մեկնաբանություն։']);
+        }
+        exit;
+    }
 
     else if ($action === 'logout') {
         logout();
@@ -64,7 +87,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     else if ($action === 'post_like') {
         $user_id = $_SESSION['user']['id'] ?? 0;
         $post_id = intval($_POST['post_id'] ?? 0);
-
         if ($user_id > 0 && $post_id > 0) {
             $result = likePost($con, $user_id, $post_id);
             echo json_encode(['success' => $result]);
@@ -118,6 +140,7 @@ else {
             exit;
         }
     }
+
     else if ($action === 'reels') {
         require '../views/reels.php';
         exit;

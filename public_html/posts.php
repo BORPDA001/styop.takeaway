@@ -202,3 +202,16 @@ function hasUserLikedPost($con, int $user_id, int $post_id) {
     $stmt->store_result();
     return $stmt->num_rows > 0;
 }
+function addComment($con, $user_id, $post_id, $content) {
+    $stmt = $con->prepare("INSERT INTO comments (user_id, post_id, content) VALUES (?, ?, ?)");
+    $stmt->bind_param("iis", $user_id, $post_id, $content);
+    return $stmt->execute();
+}
+function getPostComments($con, $post_id) {
+    $stmt = $con->prepare("SELECT comments.*, users.name FROM comments 
+                           JOIN users ON users.id = comments.user_id
+                           WHERE post_id = ? ORDER BY created_at DESC");
+    $stmt->bind_param("i", $post_id);
+    $stmt->execute();
+    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+}
