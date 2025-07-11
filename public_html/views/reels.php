@@ -1,4 +1,7 @@
 <?php
+
+include __DIR__.'/layouts/header.php';
+
 require '../db.php';
 require_once  '../posts.php';
 $user_id = $_SESSION['user']['id'] ?? 0;
@@ -110,7 +113,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 
     function loadVideo(index) {
         const video = videos[index];
-        sourceEl.src = `/styop/styop.takeaway/public_html/${video.video_path}`;
+        sourceEl.src = `<?=$default_route?>/${video.video_path}`;
         videoEl.load();
         titleEl.textContent = video.title;
         descEl.textContent = video.content.length > 150 ? video.content.substring(0, 150) + '...' : video.content;

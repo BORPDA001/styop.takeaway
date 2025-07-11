@@ -1,5 +1,10 @@
 <?php
 
+
+
+
+
+
 $page_title = "Title";
 require 'db.php';
 $result = mysqli_query($con, "SELECT * FROM posts ORDER BY created_at DESC");
@@ -47,7 +52,7 @@ $logged_in = isset($_SESSION['user']);
         <?php if ($logged_in): ?>
             <ul class="navbar-nav ms-auto me-3">
                 <li class="nav-item">
-                    <a href="../routes/web.php?action=reels" class="nav-link">
+                    <a href="<?=$default_route?>routes/web.php?action=reels" class="nav-link">
                         <i class="bi bi-camera-reels"></i> Reels
                     </a>
                 </li>
