@@ -1,7 +1,7 @@
 <?php
 
 $page_title = "Title";
-require  './db.php';
+require 'db.php';
 $result = mysqli_query($con, "SELECT * FROM posts ORDER BY created_at DESC");
 $logged_in = isset($_SESSION['user']);
 ?>
@@ -45,18 +45,26 @@ $logged_in = isset($_SESSION['user']);
         </a>
 
         <?php if ($logged_in): ?>
-            <div class="dropdown ms-auto">
+            <ul class="navbar-nav ms-auto me-3">
+                <li class="nav-item">
+                    <a href="../routes/web.php?action=reels" class="nav-link">
+                        <i class="bi bi-camera-reels"></i> Reels
+                    </a>
+                </li>
+            </ul>
+
+            <div class="dropdown">
                 <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <?= htmlspecialchars($_SESSION['user']['name']) ?>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item text-danger" href="/routes/web.php?action=logout"><i class="bi bi-box-arrow-right"></i> Դուրս գալ</a></li>
+                    <li><a class="dropdown-item text-danger" href="../routes/web.php?action=logout"><i class="bi bi-box-arrow-right"></i> Դուրս գալ</a></li>
                 </ul>
             </div>
         <?php else: ?>
             <div class="ms-auto">
-                <a href="/routes/web.php?action=login_form" class="btn btn-outline-light btn-sm">Մուտք</a>
-                <a href="/routes/web.php?action=register_form" class="btn btn-outline-light btn-sm ms-2">Գրանցվել</a>
+                <a href="routes/web.php?action=login_form" class="btn btn-outline-light btn-sm">Մուտք</a>
+                <a href="routes/web.php?action=register_form" class="btn btn-outline-light btn-sm ms-2">Գրանցվել</a>
             </div>
         <?php endif; ?>
     </div>
@@ -75,7 +83,7 @@ $logged_in = isset($_SESSION['user']);
 
     <?php if ($logged_in): ?>
         <div class="text-center mb-4">
-            <a href="web.php?action=post_create_form" class="btn btn-success btn-lg rounded-pill px-5">
+            <a href="../routes/web.php?action=post_create_form" class="btn btn-success btn-lg rounded-pill px-5">
                 ➕ Ավելացնել նոր գրառում
             </a>
         </div>
@@ -87,7 +95,7 @@ $logged_in = isset($_SESSION['user']);
 
             <?php if ($logged_in): ?>
                 <div class="text-end mb-3">
-                    <a href="web.php?action=posts_list" class="btn btn-outline-primary btn-sm rounded-pill">
+                    <a href="../routes/web.php?action=posts_list" class="btn btn-outline-primary btn-sm rounded-pill">
                         <i class="bi bi-journal-text me-1"></i> Գրառումների Ցուցակ
                     </a>
                 </div>
@@ -96,7 +104,7 @@ $logged_in = isset($_SESSION['user']);
             <div class="list-group">
                 <?php while ($post = mysqli_fetch_assoc($result)): ?>
                 <?php if ($logged_in): ?>
-                <a href="web.php?action=post_view&id=<?= $post['id'] ?>"
+                <a href="../routes/web.php?action=post_view&id=<?= $post['id'] ?>"
                    class="list-group-item list-group-item-action mt-3 rounded shadow-sm">
                     <?php else: ?>
                     <div class="list-group-item mt-3 rounded shadow-sm disabled-link">

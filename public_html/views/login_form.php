@@ -84,7 +84,7 @@ unset($_SESSION['login_errors'], $_SESSION['old']);
         </div>
     <?php endif; ?>
 
-    <form action="/routes/web.php?action=login" method="post">
+    <form action="../routes/web.php?action=login" method="post">
         <input type="hidden" name="action" value="login">
         <input type="email" name="email" placeholder="Էլ. փոստ" value="<?= htmlspecialchars($old['email'] ?? '') ?>">
         <input type="password" name="password" placeholder="Գաղտնաբառ">
@@ -92,7 +92,7 @@ unset($_SESSION['login_errors'], $_SESSION['old']);
     </form>
 
     <div class="link">
-        <p>Դեռ չունե՞ս հաշիվ? <a href="/routes/web.php?action=register_form">Գրանցվել</a></p>
+        <p>Դեռ չունե՞ս հաշիվ? <a href="../routes/web.php?action=register_form">Գրանցվել</a></p>
     </div>
     <a href="../index.php" class="btn btn-secondary mb-4" style="margin-left: 90px">Գլխավոր</a>
 

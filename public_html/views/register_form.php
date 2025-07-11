@@ -93,7 +93,7 @@ unset($_SESSION['register_errors'], $_SESSION['old']);
         </div>
     <?php endif; ?>
 
-    <form action="/routes/web.php?action=register" method="post">
+    <form action="../routes/web.php?action=register" method="post">
         <input type="hidden" name="action" value="register">
         <input type="text" name="name" placeholder="Անուն" value="<?= htmlspecialchars($old['name'] ?? '') ?>">
         <input type="email" name="email" placeholder="Email" value="<?= htmlspecialchars($old['email'] ?? '') ?>">
@@ -102,7 +102,7 @@ unset($_SESSION['register_errors'], $_SESSION['old']);
     </form>
 
     <div class="link">
-        <p>Արդեն ունե՞ս հաշիվ? <a href="/routes/web.php?action=login_form">Մուտք գործել</a></p>
+        <p>Արդեն ունե՞ս հաշիվ? <a href="../routes/web.php?action=login_form">Մուտք գործել</a></p>
     </div>
     <a href="../index.php" class="btn btn-secondary mb-4" style="margin-left: 90px">Գլխավոր</a>
 </div>
