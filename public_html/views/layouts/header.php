@@ -1,10 +1,10 @@
 <?php
-    include __DIR__."/helper.php";
+include __DIR__ . '/../../routes/helper.php';
 $logged_in = isset($_SESSION['user']) && !empty($_SESSION['user']);
-
+$page_title = "home";
 ?>
 <!doctype html>
-<html lang="hy">
+<html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -45,7 +45,7 @@ $logged_in = isset($_SESSION['user']) && !empty($_SESSION['user']);
         <?php if ($logged_in): ?>
             <ul class="navbar-nav ms-auto me-3">
                 <li class="nav-item">
-                    <a href="<?=$default_route?>routes/web.php?action=reels" class="nav-link">
+                    <a href="web.php?action=reels" class="nav-link">
                         <i class="bi bi-camera-reels"></i> Reels
                     </a>
                 </li>
@@ -56,13 +56,13 @@ $logged_in = isset($_SESSION['user']) && !empty($_SESSION['user']);
                     <?= htmlspecialchars($_SESSION['user']['name']) ?>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item text-danger" href="../routes/web.php?action=logout"><i class="bi bi-box-arrow-right"></i> Դուրս գալ</a></li>
+                    <li><a class="dropdown-item text-danger" href="web.php?action=logout">Դուրս գալ</a></li>
                 </ul>
             </div>
         <?php else: ?>
             <div class="ms-auto">
-                <a href="routes/web.php?action=login_form" class="btn btn-outline-light btn-sm">Մուտք</a>
-                <a href="routes/web.php?action=register_form" class="btn btn-outline-light btn-sm ms-2">Գրանցվել</a>
+                <a href="web.php?action=login_form" class="btn btn-outline-light btn-sm">Մուտք</a>
+                <a href="web.php?action=register_form" class="btn btn-outline-light btn-sm ms-2">Գրանցվել</a>
             </div>
         <?php endif; ?>
     </div>
